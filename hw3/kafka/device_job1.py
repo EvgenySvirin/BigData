@@ -10,18 +10,18 @@ from pyflink.datastream.formats.json import JsonRowDeserializationSchema
 from pyflink.datastream.functions import MapFunction
 
 
-def python_data_stream_example():
+def python_data_stream_example(storage="local"):
     env = StreamExecutionEnvironment.get_execution_environment()
     # Set the parallelism to be one to make sure that all data including fired timer and normal data
     # are processed by the same worker and the collected result would be in order which is good for
     # assertion.
     env.set_parallelism(1)
     env.set_stream_time_characteristic(TimeCharacteristic.EventTime)
-    
-    # добавил только эти две строчки
-    env.get_checkpoint_config().set_checkpoint_storage(CheckpointStorage("file:///opt"))
-    env.enable_checkpointing(10000000)
-    
+
+    # Добавлено
+    env.enable_checkpointing(10000)
+    local_storage = CheckpointStorage("file:///opt/pyflink/tmp/checkpoints/logs")
+    env.get_checkpoint_config().set_checkpoint_storage(local_storage)
     
     type_info: RowTypeInfo = Types.ROW_NAMED(['device_id', 'temperature', 'execution_time'],
                                              [Types.LONG(), Types.DOUBLE(), Types.INT()])
