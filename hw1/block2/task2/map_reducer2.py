@@ -17,7 +17,7 @@ class LongestCharacterDialogues(MRJob):
         yield None, (character, max_dialogue)
 
     def get_longest(self, _, character_dialogues):
-        sorted_dialogues = sorted(character_dialogues, key = lambda x : len(x[1]), reverse=True)
+        sorted_dialogues = sorted(character_dialogues, key=lambda x : len(x[1]), reverse=True)
         for ans in sorted_dialogues:
             yield ans
 
