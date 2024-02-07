@@ -107,4 +107,6 @@ Caused by: java.lang.RuntimeException: Python process exits with code: 1
 Ещё видел что мб проблема с маунтом, но по семинару маунт такой:
     volumes:
     - .:/opt/pyflink
-То есть все равно не знаю в чем проблема.
+    
+И вот тут ещё похоже https://stackoverflow.com/questions/73312123/mkdirs-failed-to-create-file-in-kubernetes-apache-flink
+Может проблема в пермишинах.
